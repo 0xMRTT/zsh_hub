@@ -37,11 +37,7 @@
             {% if object == request.user %}
             <!-- Action buttons -->
             <div class="row">
-
-
               <a class="btn" href="{% url 'users:update' %}" role="button">Edit profile</a>
-
-
             </div>
             <!-- End Action buttons -->
             {% endif %}
@@ -49,7 +45,21 @@
 
         </div>
         <div class="Layout-main">
-          MAIN
+          {% if repositories %}
+
+          {% else %}
+          <div class="blankslate">
+            <img src="https://ghicons.github.com/assets/images/blue/png/See%20project%20activity.png" alt="" class="blankslate-image" />
+            <h3 class="blankslate-heading">You don’t seem to have any repositories.</h3>
+            <p>Repositories are a way to share your code with others and allow others to contribute on</p>
+            <div class="blankslate-action">
+              <button class="btn btn-primary" type="button">New repository</button>
+            </div>
+            <div class="blankslate-action">
+              <button class="btn-link" type="button">Learn more</button>
+            </div>
+          </div>
+          {% endif %}
         </div>
 
       </div>
