@@ -4,62 +4,61 @@
 {% block title %}User: {{ object.username }}{% endblock %}
 
 {% block content %}
-<div class="clearfix pt-3">
-  <div class="col-3 float-left px-1">
-    <div class="row">
-      <div class="d-flex flex-column flex-md-row flex-items-center flex-md-items-center pl-5 p-1">
-        <div class="col-6 d-flex flex-items-center flex-items-center flex-md-items-start">
-          <img class="avatar" width="200" height="200" src="{% static 'images/png/hacker.png' %}" alt="hacker" />
-        </div>
-        <div>
-          <a href="{% url 'users:detail' request.user.username  %}"
-            class="no-underline  flex-column flex-justify-center flex-items-center flex-md-items-start">
-            <div
-              class="col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4">
-              {% if object.name %}
-              <h1 class="text-normal lh-condensed">{{ object.name }}</h1>
-              {% else %}
-              <h1 class="text-normal lh-condensed">{{ object.username }}</h1>
-              {% endif %}
-              <p class="h4 color-fg-muted text-normal mb-2">{{ object.username }}</p>
-              <a class="color-fg-muted text-small" href=""></a>
-            </div>
-          </a>
-          <div
-            class="col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4">
-            <a role="button"
-              class="btn btn-primary flex-column flex-justify-center flex-items-center flex-md-items-start">
-              Edit profile
+<div class="container-fluid">
+  <div class="row pt-5">
+    <div class="col-2">
+      <!-- EMPTY -->
+    </div>
+    <div class="col">
+      <div class="Layout">
+        <div class="Layout-sidebar">
+
+          <div class="row">
+            <img class="avatar" alt="hacker" src="{% static 'images/png/hacker.png' %}" />
+          </div>
+
+          <div class="row pt-5">
+            <a href="{% url 'users:detail' request.user.username  %}"
+              class="no-underline  flex-column flex-justify-center flex-items-center flex-md-items-start">
+              <div
+                class="col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4">
+                {% if object.name %}
+                <h1 class="text-normal lh-condensed">{{ object.name }}</h1>
+                {% else %}
+                <h1 class="text-normal lh-condensed">{{ object.username }}</h1>
+                {% endif %}
+                <p class="h4 color-fg-muted text-normal mb-2">{{ object.username }}</p>
+                <a class="color-fg-muted text-small" href=""></a>
+              </div>
             </a>
           </div>
+
+          <div class="row pt-5">
+            {% if object == request.user %}
+            <!-- Action buttons -->
+            <div class="row">
+
+
+              <a class="btn" href="{% url 'users:update' %}" role="button">Edit profile</a>
+
+
+            </div>
+            <!-- End Action buttons -->
+            {% endif %}
+          </div>
+
         </div>
+        <div class="Layout-main">
+          MAIN
+        </div>
+
       </div>
     </div>
-    <div class="row">
-
-
-
-      {% if object == request.user %}
-      <h5 class="color-fg-muted mb-2 pb-1 border-bottom"></h5>
-      <!-- Action buttons -->
-      <div class="row">
-
-        <div class="col-sm-12">
-          <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
-          <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
-          <a class="btn btn-primary" href="{% url 'two_factor:profile' %}" role="button">Two Factor</a>
-        </div>
-
-      </div>
-      <!-- End Action buttons -->
-      {% endif %}
-
-
+    <div class="col-2">
+      <!-- EMPTY -->
     </div>
   </div>
-  <div class="col-6 float-left px-1">
-    <div class="p-1">Unnested</div>
-  </div>
+</div>
 
 
 
@@ -68,4 +67,5 @@
 
 
 
-  {% endblock content %}
+
+{% endblock content %}
