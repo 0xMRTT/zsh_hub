@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}User: {{ object.username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+
+  <div class="d-flex flex-column flex-md-row flex-items-center flex-md-items-center">
+    <div class="col-2 d-flex flex-items-center flex-items-center flex-md-items-start">
+      <img class="width-full avatar mb-2 mb-md-0" src="{% static 'images/png/hacker.png' %}" alt="hacker" />
+    </div>
+    <a href="{% url 'users:detail' request.user.username  %}" class="no-underline">
+    <div class="col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4">
+      {% if object.name %}
+      <h1 class="text-normal lh-condensed">{{ object.name }}</h1>
+      {% else %}
+      <h1 class="text-normal lh-condensed">{{ object.username }}</h1>
+      {% endif %}
+      <p class="h4 color-fg-muted text-normal mb-2">{{ object.username }}</p>
+      <a class="color-fg-muted text-small" href=""></a>
+    </div>
+    </a>
+  </div>
+
+  
+
+{% if object == request.user %}
+<!-- Action buttons -->
+<div class="row">
+
+  <div class="col-sm-12">
+    <a class="btn btn-primary" href="{% url 'users:update' %}" role="button">My Info</a>
+    <a class="btn btn-primary" href="{% url 'account_email' %}" role="button">E-Mail</a>
+    <a class="btn btn-primary" href="{% url 'two_factor:profile' %}" role="button">Two Factor</a>
+  </div>
+
+</div>
+<!-- End Action buttons -->
+{% endif %}
+
+</div>
+{% endblock content %}
