@@ -19,7 +19,7 @@ user_detail_view = UserDetailView.as_view()
 
 
 class UserSettingsView(LoginRequiredMixin, TemplateView):
-    emplate_name = "user_settings.html"
+    template_name = "user_settings.html"
     model = User
 
 
