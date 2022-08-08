@@ -6,15 +6,31 @@
 {% block content %}
 <div class="container">
 
-  <div class="row">
-    <div class="col-sm-12">
-
-      <h2>{{ object.username }}</h2>
-      {% if object.name %}
-        <p>{{ object.name }}</p>
-      {% endif %}
+  <div class="d-flex flex-column flex-md-row flex-items-center flex-md-items-center py-5">
+    <div class="col-2 d-flex flex-items-center flex-items-center flex-md-items-start">
+      <img class="width-full avatar mb-2 mb-md-0" src="{% static 'images/png/hacker.png' %}" alt="hacker" />
     </div>
+    <a href="{% url 'users:detail' request.user.username  %}" class="no-underline">
+    <div class="col-12 col-md-10 d-flex flex-column flex-justify-center flex-items-center flex-md-items-start pl-md-4">
+      {% if object.name %}
+      <h1 class="text-normal lh-condensed">{{ object.name }}</h1>
+      {% else %}
+      <h1 class="text-normal lh-condensed">{{ object.username }}</h1>
+      {% endif %}
+      <p class="h4 color-fg-muted text-normal mb-2">{{ object.username }}</p>
+      <a class="color-fg-muted text-small" href=""></a>
+    </div>
+    </a>
   </div>
+
+
+
+  <nav class="SideNav border" style="max-width: 360px">
+    <a class="SideNav-item" href="#url">Account</a>
+    <a class="SideNav-item" href="#url" aria-current="page">Profile</a>
+    <a class="SideNav-item" href="#url">Emails</a>
+    <a class="SideNav-item" href="#url">Notifications</a>
+  </nav>
 
 {% if object == request.user %}
 <!-- Action buttons -->
