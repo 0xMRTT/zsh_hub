@@ -207,6 +207,7 @@ FORM_RENDERER = "django.forms.renderers.TemplatesSetting"
 # http://django-crispy-forms.readthedocs.io/en/latest/install.html#template-packs
 CRISPY_TEMPLATE_PACK = "bootstrap5"
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_CLASS_CONVERTERS = {'textinput': "textinput form-control", 'form-label': 'color-white'}
 
 # FIXTURES
 # ------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-from allauth.account.forms import SignupForm
+from allauth.account.forms import SignupForm, LoginForm
 from allauth.socialaccount.forms import SignupForm as SocialSignupForm
 from django.contrib.auth import forms as admin_forms
 from django.contrib.auth import get_user_model
@@ -33,6 +33,11 @@ class UserSignupForm(SignupForm):
     Check UserSocialSignupForm for accounts created from social.
     """
 
+class UserLoginForm(LoginForm):
+    """
+    Form that will be rendered on a user login section/screen.
+    Default fields will be added automatically.
+    """
 
 class UserSocialSignupForm(SocialSignupForm):
     """

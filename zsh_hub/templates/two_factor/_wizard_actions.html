@@ -1,0 +1,24 @@
+{% load i18n %} {% if cancel_url %}
+<a href="{{ cancel_url }}" class="float-right btn btn-danger"
+  >{% trans "Cancel" %}</a
+>
+{% endif %}
+<nav class="paginate-container" aria-label="Pagination">
+  <div class="pagination">
+    {% if wizard.steps.prev %}
+    <button
+      name="wizard_goto_step"
+      type="submit"
+      value="{{ wizard.steps.prev }}"
+      class="btn btn-secondary"
+    >
+      {% trans "Back" %}
+    </button>
+    {% else %}
+    <span class="previous_page" aria-disabled="true">Previous</span>
+    {% endif %}
+    <button type="submit" class="btn next_page" aria-label="Next Page">
+      {% trans "Next" %}
+    </button>
+  </div>
+</nav>
