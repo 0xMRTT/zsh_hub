@@ -84,6 +84,7 @@ THIRD_PARTY_APPS = [
     'two_factor.plugins.email',
     'two_factor.plugins.yubikey',
     'otp_yubikey',
+    'cookie_consent',
 ]
 
 LOCAL_APPS = [

@@ -11,6 +11,7 @@ from two_factor.urls import urlpatterns as tf_urls
 urlpatterns = [
     path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path('', include(tf_urls)),
+    path('cookies/', include('cookie_consent.urls')),
     path(
         "about/", TemplateView.as_view(template_name="pages/about.html"), name="about"
     ),

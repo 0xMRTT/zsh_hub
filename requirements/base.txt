@@ -23,3 +23,5 @@ drf-spectacular==0.23.1  # https://github.com/tfranzel/drf-spectacular
 django-two-factor-auth
 django-two-factor-auth[phonenumbers]
 django-otp-yubikey
+django-cookie-consent
+phonenumbers
