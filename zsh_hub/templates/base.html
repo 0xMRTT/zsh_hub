@@ -2,7 +2,7 @@
 {% load cookie_consent_tags %}
 <!DOCTYPE html>
 {% get_current_language as LANGUAGE_CODE %}
-<html lang="{{ LANGUAGE_CODE }}">
+<html lang="{{ LANGUAGE_CODE }}" data-color-mode="auto" data-light-theme="light" data-dark-theme="dark">
 
   <head>
     <meta charset="utf-8">
@@ -53,76 +53,135 @@
   </head>
 
   <body>
+    <div>
 
-    <nav>
-      <div class="Header">
-        <div class="Header-item">
-          <a href="{% url 'home' %}" class="Header-link f4 d-flex flex-items-center">
-            <span>ZSH-Hub</span>
-          </a>
-        </div>
-        <div class="Header-item">
-          <input type="search" class="form-control Header-input" />
-        </div>
-        <div class="Header-item Header-item--full Header-link">
-          Explore
-        </div>
-        <div class="Header-item mr-0">
-          {% if request.user.is_authenticated %}
-          <div class="dropdown">
-            <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
-              role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-              <img src="{% static 'images/png/hacker.png' %}" class="rounded-circle" height="25"
-                alt="Black and White Portrait of a Man" loading="lazy" />
+      <nav>
+        <div class="Header">
+          <div class="Header-item">
+            <a href="{% url 'home' %}" class="Header-link f4 d-flex flex-items-center">
+              <span>ZSH-Hub</span>
             </a>
-            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-              <li>
-                <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">{% translate "My
-                  Profile"%}</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="#">Settings</a>
-              </li>
-              <li>
-                <a class="dropdown-item" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
-              </li>
-            </ul>
           </div>
-          {% else %}
-          {% if ACCOUNT_ALLOW_REGISTRATION %}
+          <div class="Header-item">
+            <input type="search" class="form-control Header-input" />
+            <button class="btn mr-2" type="button">
+              <!-- <%= octicon "search" %> -->
+              <svg class="octicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" height="16">
+                <path fill-rule="evenodd"
+                  d="M11.5 7a4.499 4.499 0 11-8.998 0A4.499 4.499 0 0111.5 7zm-.82 4.74a6 6 0 111.06-1.06l3.04 3.04a.75.75 0 11-1.06 1.06l-3.04-3.04z">
+                </path>
+              </svg>
+            </button>
+          </div>
+          <div class="Header-item Header-item--full Header-link">
+            Explore
+          </div>
+          <div class="Header-item mr-0">
+            {% if request.user.is_authenticated %}
+            <div class="dropdown">
+              <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+                role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'images/png/hacker.png' %}" class="rounded-circle" height="25"
+                  alt="Black and White Portrait of a Man" loading="lazy" />
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+                <li>
+                  <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">
+                    {% translate "My Profile"%}</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Settings</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+                </li>
+              </ul>
+            </div>
+            {% else %}
+            {% if ACCOUNT_ALLOW_REGISTRATION %}
 
-          <a d="log-in-link" role="button" class="btn btn-link px-3 me-2" href="{% url 'account_login' %}">
-            {% translate "Sign In" %}
-          </a>
-          {% endif %}
-          <a id="sign-up-link" role="button" class="btn btn-primary me-3" href="{% url 'account_signup' %}">
-            {% translate "Sign Up" %}
-          </a>
-          {% endif %}
+            <a d="log-in-link" role="button" class="btn btn-outline px-3 me-2" href="{% url 'account_login' %}">
+              {% translate "Sign In" %}
+            </a>
+            {% endif %}
+            <a id="sign-up-link" role="button" class="btn btn-primary me-3" href="{% url 'account_signup' %}">
+              {% translate "Sign Up" %}
+            </a>
+            {% endif %}
+          </div>
         </div>
+      </nav>
+
+      <div class="Layout">
+        {% block content_wrapper %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+          {{ message }}
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+        {% endif %}
+
+        <div class="Layout-main pt-5">
+          {% block content %}
+          <div class="blankslate blankslate-narrow">
+            <img src="https://ghicons.github.com/assets/images/blue/png/Pull%20request.png" alt=""
+              class="blankslate-image" />
+            <h3 class="blankslate-heading">There is nothing here</h3>
+            <p>This website is in development. Replace the content block with a specific content</p>
+            <div>
+              <div class="blankslate-action">
+                <button class="btn btn-primary" type="button">Report a bug</button>
+              </div>
+              <div class="blankslate-action">
+                <button class="btn-link" type="button">Search</button>
+              </div>
+            </div>
+          </div>
+          {% endblock content %}
+        </div>
+
+
+        <div class="Layout-sidebar bg-dark">
+          {% block sidebar %}
+          <aside class="color-bg-subtle p-3" style="max-width: 360px">
+            <div class="dropdown pb-3">
+              <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
+                role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                <img class="avatar avatar-2 mr-2" alt="hacker" src="{% static 'images/png/hacker.png' %}"  />
+                {{ request.user.username }}
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuAvatar">
+                <li>
+                  <a class="dropdown-item" href="{% url 'users:detail' request.user.username  %}">
+                    {% translate "My Profile"%}</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">Settings</a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+                </li>
+              </ul>
+            </div>
+            <h5 class="color-fg-muted mb-2 pb-1 border-bottom">Menu</h5>
+
+            <nav class="SideNav">
+              <a class="SideNav-subItem" href="#url">Account</a>
+              <a class="SideNav-subItem" href="#url" aria-current="page">Profile</a>
+              <a class="SideNav-subItem" href="#url">Emails</a>
+              <a class="SideNav-subItem" href="#url">Notifications</a>
+            </nav>
+          </aside>
+          {% endblock sidebar %}
+        </div>
+        {% endblock content_wrapper %}
       </div>
-      </div>
-    </nav>
 
-    <div class="container">
-      {% block content_wrapper %}
-      {% if messages %}
-      {% for message in messages %}
-      <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
-        {{ message }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
-      {% endfor %}
-      {% endif %}
 
-      {% block content %}
-      <p>Use this document as a way to quick start any new project.</p>
-      {% endblock content %}
-      {% endblock content_wrapper %}
-    </div> <!-- /container -->
-
-    {% block modal %}{% endblock modal %}
-
+      {% block modal %}{% endblock modal %}
+    </div>
     {% block inline_javascript %}
     {% comment %}
     Script tags with only code, no src (defer by default). To run
